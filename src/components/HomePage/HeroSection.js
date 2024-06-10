@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 const navigation = [
   { name: 'Home', href: '#' },
@@ -44,12 +45,12 @@ export default function HeroSection() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end ">
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900 px-8">
+            <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900 px-8">
               Log in <span aria-hidden="true">&rarr;</span>
-            </a>
-            <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            </Link>
+            <Link to="/signup" className="text-sm font-semibold leading-6 text-gray-900">
               Sign Up <span aria-hidden="true">&rarr;</span>
-            </a>
+            </Link>
           </div>
           {/* <div className="hidden lg:flex lg:flex-1 ">
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
@@ -92,18 +93,18 @@ export default function HeroSection() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <a href="#"
+                  <Link to="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
-                  </a>
+                  </Link>
                 </div>
                 <div className="py-6">
-                  <a href="#"
+                  <Link to="/signup"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Sign Up
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
