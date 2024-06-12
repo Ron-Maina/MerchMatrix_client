@@ -97,7 +97,7 @@ function Products({onProduct}) {
 
                                     </div>
                                     <div className="text-lg text-gray-800 font-bold mt-4 bottom-5 left-5">
-                                        <div>{`$ ${product.price}`}</div>
+                                        <div>{`Ksh. ${Math.round(product.price)}`}</div>
                                     </div>
                                 </div>
                             </div>
