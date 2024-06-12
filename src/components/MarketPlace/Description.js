@@ -48,8 +48,10 @@ function Description({ product }) {
 
                     <div className="lg:p-8 flex flex-col justify-center">
                         <p className="text-4xl max-sm:text-2xl font-semibold">{product.title}</p>
-                        <div className='rounded-full'>
-                            <span className="label w-max">{product.category}</span>
+                        <div>
+                            <h3 className="relative text-xs lg:text-base inline-flex items-center dark:text-grayshade-50 text-grayshade-300 bg-zinc-200 dark:bg-grayshade-500 border border-grayshade-50 dark:border-grayshade-300 px-2 py-1 my-4 top-[1%] right-[2%] rounded-full">
+                                {product.category}
+                            </h3>
                         </div>
                         <p className="text-xl max-sm:text-base font-small text-grayshade-50 my-10">
                             {product.description}
