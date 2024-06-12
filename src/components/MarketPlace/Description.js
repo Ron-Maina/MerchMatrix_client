@@ -5,9 +5,12 @@ import { IoIosArrowBack } from 'react-icons/io';
 
 
 // import ImageSlider from '../ImageSlider';
+import AddToCart from '../../features/Cart/AddToCart';
 
 
 function Description({ product }) {
+    
+    const price = Math.round(product.price)
     const { title } = useParams();
 
     const [loading, setLoading] = useState(true);
@@ -38,7 +41,7 @@ function Description({ product }) {
                         className="absolute text-xs lg:text-base flex items-center dark:text-grayshade-50 text-grayshade-300 bg-zinc-200 dark:bg-grayshade-500 border border-grayshade-50 dark:border-grayshade-300 px-4 py-2 top-[1%] right-[2%] rounded-full"
                         to="/marketplace"
                     >
-                        <IoIosArrowBack className="text-grayshade-400 dark:text-white mr-2" />{' '}
+                        <IoIosArrowBack className="text-grayshade-400 dark:text-black mr-2" />{' '}
                         Back
                     </Link>
                     
@@ -59,17 +62,16 @@ function Description({ product }) {
                         <div className="flex justify-between items-center">
                             <div>
                                 <p className="text-grayshade-100 dark:text-grayshade-50 text-lg">Price</p>
-                                <p className="font-bold text-grayshade-300 dark:text-black                                 text-2xl">
-                                    $ {product.price}
+                                <p className="font-bold text-grayshade-300 dark:text-black text-2xl">
+                                    Ksh. {(price)}
                                 </p>
                             </div>
-                            {/* <AddToCart
+                            <AddToCart
                                 cartData={{
                                     id: product.id,
                                     title: product.title,
-                                    price: product.price,
                                 }}
-                            /> */}
+                            />
                         </div>
                     </div>
                 </div>
