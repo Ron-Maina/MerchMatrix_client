@@ -88,8 +88,13 @@ function Products({onProduct}) {
                                     <div className="text-gray-600 text-sm mt-2">
                                         <ReadMore>
                                             {product.description}
-                                        </ReadMore>
-                                        
+                                        </ReadMore>   
+                                    </div>
+                                    <div>
+                                    <h3 className="relative text-xs lg:text-base inline-flex items-center dark:text-grayshade-50 text-grayshade-300 bg-zinc-200 dark:bg-grayshade-500 border border-grayshade-50 dark:border-grayshade-300 px-2 py-1 my-4 top-[1%] right-[2%] rounded-full">
+                                        {product.category}
+                                    </h3>
+
                                     </div>
                                     <div className="text-lg text-gray-800 font-bold mt-4 bottom-5 left-5">
                                         <div>{`$ ${product.price}`}</div>
