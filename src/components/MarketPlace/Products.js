@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Triangle } from 'react-loader-spinner';
 
-
+import CategoriesMenu from './CategoriesMenu';
+import Searchbar from './Searchbar';
 
 function Products({onProduct}) {
 
@@ -34,6 +35,12 @@ function Products({onProduct}) {
 
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (products !== undefined) {
+            setLoading(false);
+        }
+    }, [products]);
      
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
@@ -41,19 +48,17 @@ function Products({onProduct}) {
         .then(data => setProducts(data))
     }, [])
 
-    useEffect(() => {
-        if (products !== undefined) {
-            setLoading(false);
-        }
-    }, [products]);
-
+   
     function handleClick (product){
         onProduct(product)
         navigate(`/description/${product.title}`)
     }
 
-  
     return (
+        <>
+        {/* <CategoriesMenu /> */}
+        {/* <Searchbar /> */}
+
         <div className="font-[sans-serif] bg-gray-100">
             {loading ? (
                 <Triangle
@@ -70,6 +75,7 @@ function Products({onProduct}) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-xl:gap-4 gap-6">
                         {products?.map(product => (
                             <div className="bg-white rounded-2xl p-5 cursor-pointer hover:-translate-y-2 transition-all relative"
+                            key={product.id}
                             onClick={() => handleClick(product)}
                             >
                                 <div className="w-5/6 h-[210px] overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
@@ -107,6 +113,7 @@ function Products({onProduct}) {
                 </div>
             )}
         </div>
+        </>
 
     )
 }
