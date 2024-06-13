@@ -56,7 +56,7 @@ function Description({ product }) {
                                 {product.category}
                             </h3>
                         </div>
-                        <p className="font-serif text-xl max-sm:text-base font-small text-grayshade-50 my-10">
+                        <p className="font-serif text-xl max-sm:text-base font-small text-grayshade-50 my-5">
                             {product.description}
                         </p>
                         <div className="flex justify-between items-center">
