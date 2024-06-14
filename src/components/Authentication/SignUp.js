@@ -1,7 +1,22 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { register } from '../../features/Authentication/authSlice'
 
 function SignUp() {
+
+    const dispatch = useDispatch()
+
+    const [username, setUser] = useState('')
+    const [email, setEmail] = useState('')
+    const [number, setNumber] = useState('')
+    const [password, setPassword] = useState('')
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        dispatch(register({username, email, number, password}))
+    }
 
     return(
         <>
@@ -79,7 +94,8 @@ function SignUp() {
                         <span className="text-gray-300 font-normal">or continue with</span>
                         <span className="h-px w-16 bg-gray-200" />
                     </div>
-                    <form className="mt-8 space-y-6">
+
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <div className="mt-8 content-center space-y-5">
                           <div className="space-y-1">
                               <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide mx-4">
@@ -89,6 +105,7 @@ function SignUp() {
                                   className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                   type="text"
                                   placeholder="username"
+                                  onChange={(e) => setUser(e.target.value)}
                               />
                           </div>
                           <div className="space-y-1">
@@ -99,6 +116,8 @@ function SignUp() {
                                   className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                   type="email"
                                   placeholder="mail@gmail.com"
+                                  onChange={(e) => setEmail(e.target.value)}
+
                               />
                           </div>
                           <div className="space-y-1">
@@ -109,6 +128,8 @@ function SignUp() {
                                   className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                   type="tel"
                                   placeholder="phone number"
+                                  onChange={(e) => setNumber(e.target.value)}
+
                               />
                           </div>
                           <div className="space-y-1">
@@ -119,6 +140,7 @@ function SignUp() {
                                   className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                   type="password"
                                   placeholder="Enter your password"
+                                  onChange={(e) => setPassword(e.target.value)}
                               />
                           </div>
                         </div>
