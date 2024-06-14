@@ -7,6 +7,7 @@ import { register } from '../../features/Authentication/authSlice'
 function SignUp() {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [username, setUser] = useState('')
     const [email, setEmail] = useState('')
@@ -16,6 +17,7 @@ function SignUp() {
     function handleSubmit(e) {
         e.preventDefault()
         dispatch(register({username, email, number, password}))
+        navigate('/login')
     }
 
     return(
