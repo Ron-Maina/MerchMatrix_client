@@ -84,8 +84,8 @@ function Navbar() {
                                 >
                                     <Link to="/#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">{`Hello ${user.username}`}</Link>
                                     <Link to="/cart" class="flex px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">My Cart
-                                        <span className='flex inline-flex mx-2'>
-                                            
+                                        <span className='flex inline-flex mx-1'>
+                                           ({(user.cart).length})
                                         </span>
                                     </Link>
                                     <Link to="/orders" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">My Orders</Link>
