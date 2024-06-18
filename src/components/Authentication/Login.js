@@ -1,21 +1,27 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 
-
-
+import { login } from '../../features/Authentication/authSlice'
 
 
 function Login() {
-    const [user, setUser] = useState('')
-    const [pwd, setPwd] = useState('')
-    const [errMsg, setErrMsg] = useState('')
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const [email, setEmail] = useState('')
+    const [password, setPwd] = useState('')
 
     
-    const handleSubmit = async(e) => {
+    function handleSubmit(e) {
         e.preventDefault()
-
+        dispatch(login({email, password})).then((action) => {
+            localStorage.setItem("accessToken",action.payload.tokens.access)
+            localStorage.setItem("refreshToken",action.payload.tokens.refresh)
+        })
+        navigate('/marketplace')
     }
 
     return(
@@ -94,7 +100,9 @@ function Login() {
                         <span className="text-gray-300 font-normal">or continue with</span>
                         <span className="h-px w-16 bg-gray-200" />
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6"
+                    onSubmit={handleSubmit}
+                    >
                         <div className="relative">
                             <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">
                                 Email
@@ -103,6 +111,7 @@ function Login() {
                                 className=" w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                 type=""
                                 placeholder="mail@gmail.com"
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             </div>
                             <div className="mt-8 content-center">
@@ -113,6 +122,8 @@ function Login() {
                                 className="w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-indigo-500"
                                 type=""
                                 placeholder="Enter your password"
+                                onChange={(e) => setPwd(e.target.value)}
+
                             />
                         </div>
                         <div className="flex items-center justify-between">
