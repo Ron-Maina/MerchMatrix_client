@@ -52,6 +52,14 @@ export const refreshToken = createAsyncThunk(
     }
 );
 
+export const logout = createAsyncThunk(
+    'auth/logout',
+    async () => {
+        localStorage.removeItem('refreshToken')
+        localStorage.removeItem('accessToken')
+    }      
+);
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -94,7 +102,11 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.currentUser = null
                 state.error = action.payload;
-            });
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.isLoading = false;
+                state.currentUser = null
+            })
     }
 });
 
