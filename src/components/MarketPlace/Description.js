@@ -3,6 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner';
 import { IoIosArrowBack } from 'react-icons/io';
 
+import { useSelector } from 'react-redux';
+
+import { selectCurrentUser } from '../../features/Authentication/authSlice';
+
+
 
 // import ImageSlider from '../ImageSlider';
 import AddToCart from '../../features/Cart/AddToCart';
@@ -10,6 +15,8 @@ import AddToCart from '../../features/Cart/AddToCart';
 
 function Description({ product }) {
     
+    const user = useSelector(selectCurrentUser);
+    console.log(user)
     const price = Math.round(product.price)
     const { title } = useParams();
 
@@ -68,8 +75,10 @@ function Description({ product }) {
                             </div>
                             <AddToCart
                                 cartData={{
-                                    id: product.id,
+                                    product_id: product.id,
                                     title: product.title,
+                                    price: price,
+                                    user_id: user.id,
                                 }}
                             />
                         </div>
