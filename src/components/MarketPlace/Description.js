@@ -79,6 +79,7 @@ function Description({ product }) {
                                     title: product.title,
                                     price: price,
                                     user_id: user.id,
+                                    image: product.image,
                                 }}
                             />
                         </div>
