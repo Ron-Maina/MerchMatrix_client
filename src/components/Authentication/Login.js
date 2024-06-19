@@ -13,6 +13,21 @@ function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPwd] = useState('')
+    const [error, setError] = useState(null);
+
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const handleEmail = event => {
+        if (!isValidEmail(event.target.value)) {
+          setError('Email is invalid');
+        } else {
+          setError(null);
+          setEmail(event.target.value);
+        }
+    };
 
     
     function handleSubmit(e) {
@@ -111,8 +126,10 @@ function Login() {
                                 className=" w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                 type=""
                                 placeholder="mail@gmail.com"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onBlur={handleEmail}
                             />
+                            {error && <h6 className="text-sm text-red-700">{error}</h6>}
+
                             </div>
                             <div className="mt-8 content-center">
                             <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">

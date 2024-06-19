@@ -13,12 +13,29 @@ function SignUp() {
     const [email, setEmail] = useState('')
     const [number, setNumber] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState(null);
+
+
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const handleEmail = event => {
+        if (!isValidEmail(event.target.value)) {
+          setError('Email is invalid');
+        } else {
+          setError(null);
+          setEmail(event.target.value);
+        }
+    };
 
     function handleSubmit(e) {
         e.preventDefault()
         dispatch(register({username, email, number, password}))
         navigate('/login')
     }
+
+    
 
     return(
         <>
@@ -108,7 +125,7 @@ function SignUp() {
                                   type="text"
                                   placeholder="username"
                                   onChange={(e) => setUser(e.target.value)}
-                              />
+                                />
                           </div>
                           <div className="space-y-1">
                               <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide mx-4">
@@ -118,9 +135,10 @@ function SignUp() {
                                   className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                   type="email"
                                   placeholder="mail@gmail.com"
-                                  onChange={(e) => setEmail(e.target.value)}
+                                  onBlur={handleEmail}
+                                />
+                                {error && <h6 className="text-sm text-red-700">{error}</h6>}
 
-                              />
                           </div>
                           <div className="space-y-1">
                               <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide mx-4">
@@ -129,10 +147,11 @@ function SignUp() {
                               <input
                                   className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                                   type="tel"
-                                  placeholder="phone number"
+                                  placeholder="07xxxx"
                                   onChange={(e) => setNumber(e.target.value)}
-
-                              />
+                                  maxLength={10}
+                                  minLength={10}
+                                />
                           </div>
                           <div className="space-y-1">
                               <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide mx-4">
@@ -143,7 +162,7 @@ function SignUp() {
                                   type="password"
                                   placeholder="Enter your password"
                                   onChange={(e) => setPassword(e.target.value)}
-                              />
+                                />
                           </div>
                         </div>
 
