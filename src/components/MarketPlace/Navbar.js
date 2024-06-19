@@ -1,16 +1,25 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCurrentUser } from '../../features/Authentication/authSlice';
+import { logout } from '../../features/Authentication/authSlice';
 
 function Navbar() {
 
     const user = useSelector(selectCurrentUser);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [openProfile, setOpenProfile] = useState(false)
+
+    function handleClick(){
+        dispatch(logout()).then(() => {
+            navigate('/home')
+        })   
+    }
 
     return (
         <nav class="bg-white">
@@ -78,18 +87,24 @@ function Navbar() {
                                     role="menu" 
                                     aria-orientation="vertical" 
                                     aria-labelledby="user-menu-button" 
-                                    tabindex="-1"
+                                
                                     onMouseEnter={() => setOpenProfile(true)}
                                     onMouseLeave={() => setOpenProfile(false)}
                                 >
-                                    <Link to="/#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">{`Hello ${user.username}`}</Link>
-                                    <Link to="/cart" class="flex px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">My Cart
-                                        <span className='flex inline-flex mx-1'>
+                                    <Link to="/#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-0">{`Hello ${user.username}`}</Link>
+                                    <Link to="/cart" class="flex px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">My Cart
+                                        {/* <span className='flex inline-flex mx-1'>
                                            ({(user.cart).length})
-                                        </span>
+                                        </span> */}
                                     </Link>
-                                    <Link to="/orders" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">My Orders</Link>
-                                    <Link to="/home" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</Link>
+                                    <Link to="/orders" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" id="user-menu-item-1">My Orders</Link>
+                                    <div 
+                                        onClick={handleClick}
+                                        class="block px-4 py-2 text-sm text-gray-700" 
+                                        role="menuitem" id="user-menu-item-2"
+                                    >
+                                        Sign out
+                                    </div>
                                 </div>
                             ) : (
                                 null
